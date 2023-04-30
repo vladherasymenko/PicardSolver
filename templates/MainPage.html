@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>System of Differential Equations Solver</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f7f7f7;
+		}
+		h1 {
+			font-size: 36px;
+			margin: 20px 0;
+			color: #444444;
+			text-align: center;
+			text-shadow: 1px 1px #ffffff;
+		}
+		form {
+			margin: 20px 0;
+			padding: 20px;
+			background-color: #ffffff;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+			max-width: 600px;
+			margin: 0 auto;
+		}
+		label {
+			display: block;
+			margin-bottom: 10px;
+			font-size: 18px;
+			font-weight: bold;
+			color: #444444;
+		}
+		input[type="text"] {
+			padding: 10px;
+			font-size: 16px;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			width: 100%;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+		}
+		input[type="number"] {
+			padding: 10px;
+			font-size: 16px;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			width: 100%;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+		}
+		input[type="submit"] {
+			background-color: #df4b4b;
+			color: white;
+			font-size: 16px;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			box-shadow: 0 5px 0 #c03434;
+			transition: all 0.1s ease-in-out;
+		}
+		input[type="submit"]:hover {
+			background-color: #c03434;
+			box-shadow: 0 3px 0 #c03434;
+			transform: translateY(2px);
+		}
+	</style>
+</head>
+<body>
+	<h1>System of Differential Equations Solver</h1>
+	<form method="POST" action="{{ url_for('index') }}">
+		<label for="numEquations">Number of Equations:</label>
+		<input type="number" id="numEquations" name="numEquations" min="1" max="10" required>
+		<div id="equations"></div>
+		<input type="submit" value="Solve Equations">
+	</form>
+
+	<script>
+		// function to generate equation input fields based on number of equations
+		function generateEquationInputs(numEquations) {
+			let equationInputs = "";
+			for (let i = 1; i <= numEquations; i++) {
+				equationInputs += `
+					<label for="equation${i}">Equation ${i}:</label>
+					<input type="text" id="equation${i}" name="equation${i}" required>
+				`;
+			}
+			document.getElementById("equations").innerHTML = equationInputs;
+		}
+
+		// listen for changes to the number of equations field
+		document.getElementById("numEquations").addEventListener("change", function() {
+			let numEquations = parseInt(this.value);
+			if (numEquations >= 1 && numEquations <= 10) {
+				generateEquationInputs(numEquations);
+			}
+		});
+
+	</script>
+</body>
+</html>

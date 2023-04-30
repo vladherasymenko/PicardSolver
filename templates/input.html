@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Дикий в плані дизайну сайт</title>
+	<style>
+
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f7f7f7;
+		}
+		h1 {
+			font-size: 36px;
+			margin: 20px 0;
+			color: #444444;
+			text-align: center;
+			text-shadow: 1px 1px #ffffff;
+		}
+		form {
+			margin: 20px 0;
+			padding: 20px;
+			background-color: #ffffff;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+			max-width: 600px;
+			margin: 0 auto;
+		}
+		label {
+			display: inline-block;
+			margin-bottom: 10px;
+			margin-right: 10px;
+			font-size: 18px;
+			font-weight: bold;
+			color: #444444;
+			width: 160px;
+			text-align: right;
+		}
+		input[type="text"], input[type="number"] {
+			padding: 10px;
+			font-size: 16px;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			width: 300px;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+		}
+		input[type="submit"] {
+			background-color: #df4b4b;
+			color: white;
+			font-size: 16px;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			box-shadow: 0 5px 0 #c03434;
+			transition: all 0.1s ease-in-out;
+			  display: block;
+  margin: 0 auto;
+			text-align: center;
+		}
+		input[type="submit"]:hover {
+			background-color: #c03434;
+			box-shadow: 0 3px 0 #c03434;
+			transform: translateY(2px);
+			  display: block;
+  margin: 0 auto;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>PicardSolver2</h1>
+	<form method="POST" action="{{ url_for('solve_equations') }}">
+		<label for="numEquations">Кількість рівнянь:</label>
+		<input type="number" id="numEquations" name="num_eqns" min="1" max="10" required>
+		<div id="equations"></div>
+		<input type="submit" value="Розв'язати систему" >
+	</form>
+
+	<script>
+		// function to generate equation input fields based on number of equations
+		function generateEquationInputs(numEquations) {
+			let equationInputs = "";
+			for (let i = 1; i <= numEquations; i++) {
+				equationInputs += `
+					<label for="equation${i}">y${i}' =</label>
+					<input type="text" id="equation${i}" name="eqn${i}" placeholder="Наприклад : sin(x)+y${i}" required>
+					<label for="initial${i}">y${i}(x0)=</label>
+					<input type="number" placeholder="Наприклад : ${i}" id="initial${i}" name="y${i}_0" required>
+					<br>
+				`;
+			}
+			equationInputs += '<label htmlFor="x0">x0=</label><input placeholder="Наприклад : 0" type="number" id="x0" name="x0" required><br><br>';
+
+			equationInputs += '<label htmlFor="iters">Кількість ітерацій=</label><input placeholder="Наприклад : 5" type="number" id="iters" name="iters" required><br><br>';
+
+			document.getElementById("equations").innerHTML = equationInputs;
+		}
+
+		// listen for changes to the number of equations field
+				document.getElementById("numEquations").addEventListener("change", function() {
+			let numEquations = parseInt(this.value);
+			if (numEquations >= 1 && numEquations <= 10) {
+				generateEquationInputs(numEquations);
+			}
+		});
+
+	</script>
+</body>
+</html>

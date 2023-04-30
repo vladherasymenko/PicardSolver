@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Хай йому грець! Помилка!</title>
+	<style>
+		body {
+			background-color: #f7f7f7;
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			color: #333333;
+			font-size: 16px;
+			line-height: 1.5;
+		}
+		h1 {
+			font-size: 36px;
+			margin: 20px 0;
+			color: #333333;
+			text-align: center;
+			text-shadow: 1px 1px #ffffff;
+		}
+		.container {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			margin: 0 auto;
+			max-width: 800px;
+			padding: 20px;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+			background-color: #ffffff;
+			border-radius: 10px;
+			box-sizing: border-box;
+			margin-top: 30px;
+			margin-bottom: 30px;
+		}
+		.container p {
+			margin: 10px;
+			padding: 5px;
+			font-size: 24px;
+			font-weight: bold;
+			text-align: center;
+			color: #333333;
+			border: 1px solid #cccccc;
+			border-radius: 5px;
+			background-color: #f7f7f7;
+			box-shadow: 0 0 5px rgba(0,0,0,0.1);
+			word-wrap: break-word;
+		}
+		.container p:nth-child(2n) {
+			background-color: #e8e8e8;
+		}
+		.container p:first-child {
+			margin-top: 0;
+		}
+		.container p:last-child {
+			margin-bottom: 0;
+		}
+
+        		input[type="submit"] {
+			background-color: 	#0000FF;
+			color: white;
+			font-size: 16px;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			box-shadow: 0 5px 0 #00008B;
+			transition: all 0.1s ease-in-out;
+			  display: block;
+  margin: 0 auto;
+			text-align: center;
+		}
+		input[type="submit"]:hover {
+			background-color: #00008B;
+			box-shadow: 0 3px 0 #00008B;
+			transform: translateY(2px);
+			  display: block;
+  margin: 0 auto;
+			text-align: center;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>Дідько! Сталася якась помилка!</h1>
+	<div class="container">
+        <p>Перевірте правильність вводу рівнянь : </p>
+        <p>Введені рівняння можуть містити лише змінні х, y1, y2,...</p>
+        <p>На даному етапі підтримуються тільки такі елементарні функції : e, sin, cos та log</p>
+        <p>Дозволені лише базові арифметичні операції : +, -, *, /, ^ </p>
+        <p>Якщо помилка повторюється навіть при правильному введені рівнянь, то перевірте визначеність, неперервність та ліпшицевість правих частин рівнянь </p>
+        <p>Прийміть до уваги, що система все ще знаходиться на початковому етапі розробки, тому помилки в роботі сервера також можливі </p>
+
+        <form method="GET" action="{{ url_for('solve_equations') }}">
+		<input type="submit" value="На головну" >
+	</form>
+    </div>
+
+</body>
+</html>
